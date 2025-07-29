@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS 적용 학습 가이드</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Fira+Code:wght@300;400;500&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 20mm;
+      background: white;
+    }
+    
+    @media print {
+      body {
+        padding: 15mm;
+        font-size: 12px;
+      }
+      
+      .page-break {
+        page-break-before: always;
+      }
+      
+      .no-print {
+        display: none;
+      }
+    }
+    
+    h1 {
+      color: #1e40af;
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 1em;
+      text-align: center;
+      border-bottom: 3px solid #3b82f6;
+      padding-bottom: 0.5em;
+    }
+    
+    h2 {
+      color: #1e40af;
+      font-size: 1.8em;
+      font-weight: 600;
+      margin: 2em 0 1em 0;
+      border-left: 4px solid #3b82f6;
+      padding-left: 0.5em;
+    }
+    
+    h3 {
+      color: #374151;
+      font-size: 1.3em;
+      font-weight: 500;
+      margin: 1.5em 0 0.8em 0;
+    }
+    
+    h4 {
+      color: #4b5563;
+      font-size: 1.1em;
+      font-weight: 500;
+      margin: 1em 0 0.5em 0;
+    }
+    
+    p {
+      margin-bottom: 1em;
+      text-align: justify;
+    }
+    
+    code {
+      font-family: 'Fira Code', monospace;
+      background: #f3f4f6;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+      color: #dc2626;
+    }
+    
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1em;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1em 0;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85em;
+      line-height: 1.4;
+    }
+    
+    pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+      font-size: 0.9em;
+    }
+    
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 0.5em;
+      text-align: left;
+    }
+    
+    th {
+      background: #f3f4f6;
+      font-weight: 600;
+      color: #374151;
+    }
+    
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    
+    .highlight {
+      background: #fef3c7;
+      padding: 1em;
+      border-left: 4px solid #f59e0b;
+      margin: 1em 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .tip {
+      background: #ecfdf5;
+      border: 1px solid #10b981;
+      padding: 1em;
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+    
+    .tip::before {
+      content: "💡 ";
+      font-weight: bold;
+    }
+    
+    .emoji {
+      font-size: 1.2em;
+    }
+    
+    ul, ol {
+      margin: 1em 0;
+      padding-left: 2em;
+    }
+    
+    li {
+      margin-bottom: 0.5em;
+    }
+    
+    .toc {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+    
+    .toc h3 {
+      margin-top: 0;
+      color: #1e40af;
+    }
+    
+    .toc ul {
+      margin: 0;
+    }
+    
+    .toc li {
+      margin-bottom: 0.3em;
+    }
+    
+    .print-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+    }
+    
+    .print-button:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <button class="print-button no-print" onclick="window.print()">📄 PDF로 저장</button>
+
+  <h1><span class="emoji">📚</span> Tailwind CSS 적용 학습 가이드</h1>
+
+  <div class="toc">
+    <h3>목차</h3>
+    <ul>
+      <li>1. 프로젝트 개요</li>
+      <li>2. Tailwind CSS 설정</li>
+      <li>3. CSS → Tailwind 변환 과정</li>
+      <li>4. 주요 Tailwind 유틸리티 클래스 학습</li>
+      <li>5. 반응형 및 상호작용</li>
+      <li>6. 반응형 디자인 고려사항</li>
+      <li>7. 학습 팁</li>
+      <li>8. 핵심 개념 정리</li>
+    </ul>
+  </div>
+
+  <h2><span class="emoji">🎯</span> 1. 프로젝트 개요</h2>
+  <ul>
+    <li><strong>기존 상태:</strong> 순수 CSS(<code>assets/style.css</code>) 사용</li>
+    <li><strong>변경 후:</strong> Tailwind CSS 유틸리티 클래스 사용</li>
+    <li><strong>적용 방법:</strong> CDN 방식 (개발 단계에서 가장 간단한 방법)</li>
+  </ul>
+
+  <h2><span class="emoji">🔧</span> 2. Tailwind CSS 설정</h2>
+
+  <h3>2-1. CDN 추가</h3>
+  <pre><code>&lt;!-- 기존 CSS 파일 주석 처리 --&gt;
+&lt;!-- &lt;link rel="stylesheet" href="./assets/style.css"&gt; --&gt;
+
+&lt;!-- Tailwind CSS CDN 추가 --&gt;
+&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</code></pre>
+
+  <h3>2-2. 커스텀 폰트 설정</h3>
+  <pre><code>&lt;script&gt;
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          'noto-serif': ['"Noto Serif KR"', 'serif'],
+          'noto-sans': ['"Noto Sans"', 'sans-serif'],
+        }
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+
+  <div class="page-break"></div>
+
+  <h2><span class="emoji">🎨</span> 3. CSS → Tailwind 변환 과정</h2>
+
+  <h3>3-1. 기본 레이아웃 변환</h3>
+  
+  <h4>기존 CSS:</h4>
+  <pre><code>body { 
+  text-align: center; 
+  padding: 2rem; 
+  margin: 0;
+  background-color: #fafafa;
+}</code></pre>
+
+  <h4>Tailwind 클래스:</h4>
+  <pre><code>&lt;body class="text-center p-8 m-0 bg-gray-50 font-noto-sans"&gt;</code></pre>
+
+  <div class="highlight">
+    <strong>학습 포인트:</strong>
+    <ul>
+      <li><code>text-center</code> = <code>text-align: center</code></li>
+      <li><code>p-8</code> = <code>padding: 2rem</code> (8 × 0.25rem = 2rem)</li>
+      <li><code>m-0</code> = <code>margin: 0</code></li>
+      <li><code>bg-gray-50</code> = <code>background-color: #fafafa</code></li>
+    </ul>
+  </div>
+
+  <h3>3-2. 제목 스타일 변환</h3>
+  
+  <h4>기존 CSS:</h4>
+  <pre><code>h1 { 
+  font-family: "Noto Serif KR", serif; 
+  color: #333;
+  margin-bottom: 1rem;
+}</code></pre>
+
+  <h4>Tailwind 클래스:</h4>
+  <pre><code>&lt;h1 class="font-noto-serif text-gray-800 mb-4 text-3xl"&gt;</code></pre>
+
+  <div class="highlight">
+    <strong>학습 포인트:</strong>
+    <ul>
+      <li><code>font-noto-serif</code> = 커스텀 폰트 패밀리</li>
+      <li><code>text-gray-800</code> = <code>color: #333</code></li>
+      <li><code>mb-4</code> = <code>margin-bottom: 1rem</code></li>
+      <li><code>text-3xl</code> = 큰 폰트 사이즈</li>
+    </ul>
+  </div>
+
+  <h3>3-3. 이미지 스타일 변환</h3>
+  
+  <h4>기존 CSS:</h4>
+  <pre><code>img { 
+  max-width: 90%; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  min-width: 400px;
+  margin: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}</code></pre>
+
+  <h4>Tailwind 클래스:</h4>
+  <pre><code>&lt;img class="max-w-full w-full max-w-2xl border border-gray-300 
+           rounded-lg mx-auto my-2 shadow-sm block" /&gt;</code></pre>
+
+  <div class="highlight">
+    <strong>학습 포인트:</strong>
+    <ul>
+      <li><code>max-w-full</code> = <code>max-width: 100%</code></li>
+      <li><code>max-w-2xl</code> = 최대 너비 제한</li>
+      <li><code>border border-gray-300</code> = <code>border: 1px solid #ccc</code></li>
+      <li><code>rounded-lg</code> = <code>border-radius: 8px</code></li>
+      <li><code>mx-auto</code> = 가로 중앙 정렬</li>
+      <li><code>shadow-sm</code> = 작은 그림자 효과</li>
+    </ul>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2><span class="emoji">🎯</span> 4. 주요 Tailwind 유틸리티 클래스 학습</h2>
+
+  <h3>4-1. 간격 (Spacing)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Tailwind</th>
+        <th>CSS</th>
+        <th>설명</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>p-4</code></td>
+        <td><code>padding: 1rem</code></td>
+        <td>패딩</td>
+      </tr>
+      <tr>
+        <td><code>px-4</code></td>
+        <td><code>padding-left: 1rem; padding-right: 1rem</code></td>
+        <td>좌우 패딩</td>
+      </tr>
+      <tr>
+        <td><code>py-2</code></td>
+        <td><code>padding-top: 0.5rem; padding-bottom: 0.5rem</code></td>
+        <td>상하 패딩</td>
+      </tr>
+      <tr>
+        <td><code>m-0</code></td>
+        <td><code>margin: 0</code></td>
+        <td>마진</td>
+      </tr>
+      <tr>
+        <td><code>mx-auto</code></td>
+        <td><code>margin-left: auto; margin-right: auto</code></td>
+        <td>가로 중앙 정렬</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4-2. 색상 (Colors)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Tailwind</th>
+        <th>CSS</th>
+        <th>설명</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>bg-gray-50</code></td>
+        <td><code>background-color: #fafafa</code></td>
+        <td>연한 회색 배경</td>
+      </tr>
+      <tr>
+        <td><code>text-gray-800</code></td>
+        <td><code>color: #1f2937</code></td>
+        <td>진한 회색 텍스트</td>
+      </tr>
+      <tr>
+        <td><code>text-blue-600</code></td>
+        <td><code>color: #2563eb</code></td>
+        <td>파란색 텍스트</td>
+      </tr>
+      <tr>
+        <td><code>border-gray-300</code></td>
+        <td><code>border-color: #d1d5db</code></td>
+        <td>회색 테두리</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4-3. 레이아웃 (Layout)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Tailwind</th>
+        <th>CSS</th>
+        <th>설명</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>text-center</code></td>
+        <td><code>text-align: center</code></td>
+        <td>텍스트 중앙 정렬</td>
+      </tr>
+      <tr>
+        <td><code>block</code></td>
+        <td><code>display: block</code></td>
+        <td>블록 요소</td>
+      </tr>
+      <tr>
+        <td><code>inline-block</code></td>
+        <td><code>display: inline-block</code></td>
+        <td>인라인 블록</td>
+      </tr>
+      <tr>
+        <td><code>flex</code></td>
+        <td><code>display: flex</code></td>
+        <td>플렉스 컨테이너</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>4-4. 효과 (Effects)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Tailwind</th>
+        <th>CSS</th>
+        <th>설명</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>shadow-sm</code></td>
+        <td><code>box-shadow: 0 1px 2px rgba(0,0,0,0.05)</code></td>
+        <td>작은 그림자</td>
+      </tr>
+      <tr>
+        <td><code>rounded-lg</code></td>
+        <td><code>border-radius: 0.5rem</code></td>
+        <td>둥근 모서리</td>
+      </tr>
+      <tr>
+        <td><code>hover:bg-gray-50</code></td>
+        <td><code>:hover { background-color: #f9fafb }</code></td>
+        <td>호버 효과</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2><span class="emoji">🚀</span> 5. 반응형 및 상호작용</h2>
+
+  <h3>5-1. 호버 효과</h3>
+  <pre><code>&lt;a class="text-blue-600 hover:bg-gray-50 hover:underline 
+        transition-colors duration-300"&gt;</code></pre>
+  <ul>
+    <li><code>hover:bg-gray-50</code>: 마우스 올릴 때 배경색 변경</li>
+    <li><code>transition-colors duration-300</code>: 부드러운 색상 전환</li>
+  </ul>
+
+  <h3>5-2. 플렉스 레이아웃</h3>
+  <pre><code>&lt;div class="flex flex-wrap justify-center gap-2"&gt;</code></pre>
+  <ul>
+    <li><code>flex</code>: 플렉스 컨테이너</li>
+    <li><code>flex-wrap</code>: 줄바꿈 허용</li>
+    <li><code>justify-center</code>: 가로 중앙 정렬</li>
+    <li><code>gap-2</code>: 자식 요소 간 간격</li>
+  </ul>
+
+  <h2><span class="emoji">📱</span> 6. 반응형 디자인 고려사항</h2>
+  <p>Tailwind는 기본적으로 모바일 우선 접근법을 사용합니다:</p>
+  <ul>
+    <li><strong>기본 클래스:</strong> 모바일</li>
+    <li><strong><code>sm:</code></strong> 640px 이상</li>
+    <li><strong><code>md:</code></strong> 768px 이상</li>
+    <li><strong><code>lg:</code></strong> 1024px 이상</li>
+  </ul>
+
+  <h2><span class="emoji">💡</span> 7. 학습 팁</h2>
+
+  <h3>7-1. 시스템적 접근</h3>
+  <ol>
+    <li><strong>간격:</strong> 4의 배수 시스템 (4 = 1rem)</li>
+    <li><strong>색상:</strong> gray-50부터 gray-900까지 체계적 명명</li>
+    <li><strong>크기:</strong> text-xs부터 text-6xl까지 일관된 스케일</li>
+  </ol>
+
+  <h3>7-2. 개발자 도구 활용</h3>
+  <p>브라우저 개발자 도구에서 Tailwind 클래스들이 어떤 CSS로 변환되는지 확인하여 학습</p>
+
+  <h3>7-3. 공식 문서 참조</h3>
+  <ul>
+    <li><strong>Tailwind CSS 공식 문서:</strong> https://tailwindcss.com/docs</li>
+    <li>각 유틸리티 클래스의 정확한 CSS 값 확인 가능</li>
+  </ul>
+
+  <div class="tip">
+    <strong>실습 팁:</strong> 기존 CSS 속성을 Tailwind 클래스로 변환하는 연습을 반복하면 빠르게 익힐 수 있습니다.
+  </div>
+
+  <h2><span class="emoji">🎯</span> 8. 이 프로젝트에서 배운 핵심 개념</h2>
+
+  <ol>
+    <li><strong>유틸리티 우선 접근법:</strong> 작은 단위의 클래스들을 조합하여 스타일 구성</li>
+    <li><strong>일관된 디자인 시스템:</strong> 미리 정의된 값들로 일관성 유지</li>
+    <li><strong>반응형 친화적:</strong> 모바일 우선으로 설계된 클래스 시스템</li>
+    <li><strong>유지보수성:</strong> HTML만 봐도 스타일을 파악할 수 있는 명확성</li>
+  </ol>
+
+  <div class="highlight">
+    <p><strong>결론:</strong> 이 학습 가이드를 통해 Tailwind CSS의 기본 개념과 실제 적용 방법을 이해할 수 있습니다! <span class="emoji">🎉</span></p>
+  </div>
+
+  <div style="text-align: center; margin-top: 3em; color: #6b7280; font-size: 0.9em;">
+    <hr style="margin: 2em 0; border: none; border-top: 1px solid #e5e7eb;">
+    <p>북촌을 잇다 프로젝트 - Tailwind CSS 적용 학습 가이드</p>
+    <p>생성일: 2025년 1월 30일</p>
+  </div>
+</body>
+</html> 

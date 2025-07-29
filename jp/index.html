@@ -1,33 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>북촌을 잇다 - Japanese Menu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif+KR:wght@450&display=swap" rel="stylesheet">
-  <style>
-
-    body { text-align: center; padding: 2rem; }
-    h1 { font-family: "Noto Serif KR", serif; }
-    img { max-width: 90%; border: 1px solid #ccc; border-radius: 8px; }
-    nav a { margin: 0 10px; text-decoration: none; color: blue; }
-    .english { font-family: "Noto Sans", sans-serif; }
-  </style>
+  <!-- <link rel="stylesheet" href="../assets/style.css"> -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'noto-serif': ['"Noto Serif KR"', 'serif'],
+            'noto-sans': ['"Noto Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
-  <div class="english">
-    <img src="../assets/menu/jp_bagels.jpeg" alt="Japanese Menu Bagels" />
-    <img src="../assets/menu/jp_etc.jpeg" alt="Japanese Menu Etc" />
-
-    <nav>
-      <p>🌍 Choose Language:</p>
-      <a href="/bukchon-itda/en/">EN</a>
-      <a href="/bukchon-itda/fr/">FR</a>
-      <a href="/bukchon-itda/ch/">CH</a>
-      <a href="/bukchon-itda/">KR</a>
-
-    </nav>
+<body class="text-center p-8 m-0 bg-gray-50 font-noto-sans">
+  <h1 class="font-noto-serif text-gray-800 mb-4 text-3xl">Connecting Bukchon</h1>
+  <div id="navigation" data-current-lang="jp"></div>
+  <div>
+    <img src="../assets/menu/jp_bagels.jpeg" alt="Japanese Menu Bagels" 
+         class="max-w-full w-full max-w-2xl border border-gray-300 rounded-lg mx-auto my-2 shadow-sm block" />
+    <img src="../assets/menu/jp_etc.jpeg" alt="Japanese Menu Etc" 
+         class="max-w-full w-full max-w-2xl border border-gray-300 rounded-lg mx-auto my-2 shadow-sm block" />
   </div>
+  
+  <script src="../assets/navigation.js"></script>
 </body>
 </html>
