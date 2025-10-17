@@ -20,7 +20,7 @@ function createNavigation(currentLang = 'kr') {
 
   const mapPath = basePrefix + 'map.html';
   
-  let navHTML = '<nav class="mt-8 p-4 bg-gray-50"><div class="flex flex-wrap justify-center gap-2">';
+  let navHTML = '<nav class="mt-4 p-4 bg-gray-50"><div class="flex flex-wrap justify-center gap-2">';
   
   // 모든 언어 버튼들 표시
   languages.forEach(lang => {

@@ -9,6 +9,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif+KR:wght@450&display=swap" rel="stylesheet">
   <!-- <link rel="stylesheet" href="./assets/style.css"> -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @font-face {
+      font-family: 'Cafe24Moyamoya';
+      src: url('./assets/font/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2'),
+           url('./assets/font/Cafe24Moyamoya-Face-v1.0.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    .moyamoya-font {
+      font-family: 'Cafe24Moyamoya', sans-serif !important;
+    }
+  </style>
   <script>
     tailwind.config = {
       theme: {
@@ -23,7 +37,10 @@
   </script>
 </head>
 <body class="text-center p-8 m-0 bg-gray-50 font-noto-sans">
-  <h1 class="font-noto-serif text-gray-800 mb-4 text-3xl">북촌을 잇다 (Connecting Bukchon) - Location</h1>
+  <h1 class="moyamoya-font text-gray-800 mb-4 text-2xl"><div>북촌을 잇다</div>
+    <div>(Connecting Bukchon)</div> 
+    <div>Location</div>
+  </h1>
   <div id="navigation" data-current-lang="map"></div>
 
   <div class="my-8 rounded-lg overflow-hidden shadow-sm flex justify-center">
