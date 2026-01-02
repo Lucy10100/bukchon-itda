@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="fa">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>북촌을 잇다 - Menu</title>
+  <title>북촌을 잇다 - Afghan Menu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif+KR:wght@450&display=swap" rel="stylesheet">
+  <!-- 카페24 모야모야 폰트 -->
   <style>
     @font-face {
       font-family: 'Cafe24Moyamoya';
-      src: url('./assets/font/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2'),
-           url('./assets/font/Cafe24Moyamoya-Face-v1.0.woff') format('woff');
+      src: url('../assets/font/Cafe24Moyamoya-Face-v1.0.woff2') format('woff2'),
+           url('../assets/font/Cafe24Moyamoya-Face-v1.0.woff') format('woff');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
     }
-    
+
     .moyamoya-font {
       font-family: 'Cafe24Moyamoya', sans-serif !important;
     }
   </style>
-  <!-- <link rel="stylesheet" href="./assets/style.css"> -->
+  <!-- <link rel="stylesheet" href="../assets/style.css"> -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -29,7 +30,8 @@
         extend: {
           fontFamily: {
             'noto-serif': ['"Noto Serif KR"', 'serif'],
-            'noto-sans': ['"Noto Sans"', 'sans-serif']
+            'noto-sans': ['"Noto Sans"', 'sans-serif'],
+            'cafe24-moyamoya': ['Cafe24Moyamoya', 'sans-serif'],
           }
         }
       }
@@ -37,17 +39,19 @@
   </script>
 </head>
 <body class="text-center p-8 m-0 bg-gray-50 font-noto-sans">
-  <h1 class="moyamoya-font text-gray-800 mb-4 text-3xl">북촌을 잇다</h1>
-  <div id="navigation" data-current-lang="kr"></div>
-  <div class="kr flex flex-col sm:flex-row sm:gap-4 sm:justify-center">
-    <img src="./assets/menu/kr_bagels.jpeg" alt="Korean Menu Bagels" 
+  <h1 class="moyamoya-font text-gray-800 mb-4 text-3xl">Connecting Bukchon</h1>
+  <div id="navigation" data-current-lang="af"></div>
+  <div class="flex flex-col sm:flex-row sm:gap-4 sm:justify-center">
+    <img src="../assets/menu/af_bagels.jpeg" alt="Afghan Menu Bagels"
          class="max-w-full w-full sm:w-1/3 sm:max-w-xs border border-gray-300 rounded-lg mx-auto my-2 shadow-sm" />
-    <img src="./assets/menu/kr_etc.jpeg" alt="Korean Menu Etc" 
+    <img src="../assets/menu/af_etc.jpeg" alt="Afghan Menu Etc"
          class="max-w-full w-full sm:w-1/3 sm:max-w-xs border border-gray-300 rounded-lg mx-auto my-2 shadow-sm" />
-    <img src="./assets/menu/kr_sandwich.jpeg" alt="Korean Menu Sandwich" 
+    <img src="../assets/menu/af_sandwich.jpeg" alt="Afghan Menu Sandwich"
          class="max-w-full w-full sm:w-1/3 sm:max-w-xs border border-gray-300 rounded-lg mx-auto my-2 shadow-sm" />
   </div>
-  
-  <script src="./assets/navigation.js"></script>
+
+  <script src="../assets/navigation.js"></script>
 </body>
 </html>
+</content>
+</invoke>

@@ -2,10 +2,11 @@
 function createNavigation(currentLang = 'kr') {
   // 현재 페이지의 경로를 기반으로 상대 경로 결정
   const currentPath = window.location.pathname;
-  const isSubPage = currentPath.includes('/en/') || 
-                   currentPath.includes('/fr/') || 
-                   currentPath.includes('/jp/') || 
-                   currentPath.includes('/ch/');
+  const isSubPage = currentPath.includes('/en/') ||
+                   currentPath.includes('/fr/') ||
+                   currentPath.includes('/jp/') ||
+                   currentPath.includes('/ch/') ||
+                   currentPath.includes('/af/');
   
   // 로컬 파일 시스템에서도 작동하도록 상대 경로 사용
   const basePrefix = isSubPage ? '../' : './';
@@ -15,7 +16,8 @@ function createNavigation(currentLang = 'kr') {
     { code: 'en', name: 'EN', path: basePrefix + 'en/index.html' },
     { code: 'fr', name: 'FR', path: basePrefix + 'fr/index.html' },
     { code: 'jp', name: 'JP', path: basePrefix + 'jp/index.html' },
-    { code: 'ch', name: 'CH', path: basePrefix + 'ch/index.html' }
+    { code: 'ch', name: 'CH', path: basePrefix + 'ch/index.html' },
+    { code: 'af', name: 'AF', path: basePrefix + 'af/index.html' }
   ];
 
   const mapPath = basePrefix + 'map.html';
